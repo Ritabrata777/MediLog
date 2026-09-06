@@ -19,6 +19,7 @@ import { LogOut, PanelLeft, Stethoscope, VenetianMask } from 'lucide-react';
 import { IconLogo } from '@/components/icons';
 import { useWallet } from '@/context/wallet-context';
 import ConnectWalletButton from '@/components/connect-wallet-button';
+import { ModeToggle } from '@/components/mode-toggle';
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 export default function DashboardLayout({
@@ -101,7 +102,8 @@ export default function DashboardLayout({
                   </SidebarContent>
               </SheetContent>
             </Sheet>
-            <div className="ml-auto">
+            <div className="ml-auto flex items-center gap-4">
+              <ModeToggle />
               <ConnectWalletButton />
             </div>
           </header>

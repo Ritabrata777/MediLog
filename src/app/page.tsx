@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { Stethoscope, Shield, Database, User, Server, FileText, Upload, Download, VenetianMask } from 'lucide-react';
 import { IconPolygon, IconIpfs, IconCeramic, IconLogo } from '@/components/icons';
 import ConnectWalletButton from '@/components/connect-wallet-button';
+import { ModeToggle } from '@/components/mode-toggle';
 
 export default function Home() {
   return (
@@ -15,7 +16,8 @@ export default function Home() {
           <IconLogo className="h-6 w-6 text-primary" />
           <span className="text-xl font-bold font-headline">MediLog</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
+        <nav className="ml-auto flex items-center gap-4 sm:gap-6">
+          <ModeToggle />
           <ConnectWalletButton />
         </nav>
       </header>
