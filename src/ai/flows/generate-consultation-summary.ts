@@ -21,10 +21,10 @@ const GenerateConsultationSummaryInputSchema = z.object({
 export type GenerateConsultationSummaryInput = z.infer<typeof GenerateConsultationSummaryInputSchema>;
 
 const GenerateConsultationSummaryOutputSchema = z.object({
-  encryptedSummary: z
+  rawSummary: z
     .string()
     .describe(
-      'The encrypted consultation summary, ready to be stored securely. The encryption algorithm and key used must be pre-negotiated between doctor and patient.'
+      'The raw consultation summary in Markdown format.'
     ),
 });
 export type GenerateConsultationSummaryOutput = z.infer<typeof GenerateConsultationSummaryOutputSchema>;
@@ -49,7 +49,7 @@ const consultationSummaryPrompt = ai.definePrompt({
 
   Patient Address: {{{patientAddress}}}
 
-  Encrypted Summary:`,
+  Structured Summary:`,
 });
 
 const generateConsultationSummaryFlow = ai.defineFlow(

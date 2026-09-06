@@ -1,6 +1,7 @@
 "use server";
 
 import { generateConsultationSummary, GenerateConsultationSummaryInput } from "@/ai/flows/generate-consultation-summary";
+import { encryptData } from "@/lib/encryption";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -36,9 +37,19 @@ export async function handleGenerateSummary(prevState: any, formData: FormData) 
 
     const result = await generateConsultationSummary(input);
 
+    const secretKey = process.env.ENCRYPTION_MASTER_KEY;
+    if (!secretKey) {
+      throw new Error("ENCRYPTION_MASTER_KEY is not set in environment variables");
+    }
+
+    const { encryptedData } = encryptData(result.rawSummary, secretKey);
+
+    // Placeholder for IPFS upload
+    // const ipfsCid = await uploadToIPFS(encryptedData);
+
     return {
       message: "Summary generated successfully.",
-      summary: result.encryptedSummary,
+      summary: encryptedData, // we return encryptedData instead of rawSummary
     };
   } catch (error) {
     console.error(error);
